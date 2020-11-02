@@ -1,6 +1,6 @@
 require('dotenv').config();
-const nodemailer=require("nodemailer");
-const mailGun=require("nodemailer-mailgun-transport");
+import { createTransport } from "nodemailer";
+import mailGun from "nodemailer-mailgun-transport";
 
 const auth={
   auth:{
@@ -9,7 +9,7 @@ const auth={
   }
 };
 
-const transporter = nodemailer.createTransport(mailGun(auth));
+const transporter = createTransport(mailGun(auth));
 
 
 const sendMail=(email,subject,text,cb)=>{
@@ -27,4 +27,4 @@ transporter.sendMail(mailOptions,function(err,data){
   }
 });
 }
-module.exports=sendMail;
+export default sendMail;
